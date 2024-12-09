@@ -1,11 +1,11 @@
 use std::fs::File;
-use std::io::{prelude::*, BufReader};
+use std::io::{self, prelude::*, BufReader};
 
 static MAX_SAFE_DIFFERENCE: u8 = 3;
 static MIN_SAFE_DIFFERENCE: u8 = 1;
 
-pub fn day2() {
-    let file = File::open("./src/day2/input.txt").expect("File does not exist");
+pub fn day2() -> io::Result<()> {
+    let file = File::open("./src/day2/input.txt")?;
     let reader = BufReader::new(file);
 
     let data = reader
@@ -23,6 +23,7 @@ pub fn day2() {
         .filter(|report| is_safe_report(report, 1))
         .count();
     print!("Safe reports: {}", safe_report_count);
+    Ok(())
 }
 
 pub fn is_safe_report(report: &[u32], error_tolerance: u8) -> bool {

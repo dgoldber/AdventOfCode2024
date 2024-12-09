@@ -1,13 +1,11 @@
 use regex::Regex;
 use std::fs::File;
-use std::io::{BufReader, Read};
+use std::io::{self, BufReader, Read};
 
-pub fn day3() {
-    let mut data: BufReader<File> =
-        BufReader::new(File::open("./src/day3/input.txt").expect("cannot open file"));
+pub fn day3() -> io::Result<()> {
+    let mut data: BufReader<File> = BufReader::new(File::open("./src/day3/input.txt")?);
     let mut input_str = String::new();
-    data.read_to_string(&mut input_str)
-        .expect("cannot read string");
+    data.read_to_string(&mut input_str)?;
     println!(
         "part 1: {}",
         MultParser::new(input_str.clone())
@@ -18,6 +16,7 @@ pub fn day3() {
         "part 2: {}",
         MultParser::new(input_str).parse().calculate_total()
     );
+    Ok(())
 }
 
 struct MultParser {
