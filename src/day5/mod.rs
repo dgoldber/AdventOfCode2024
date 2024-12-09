@@ -227,7 +227,6 @@ mod is_update_good {
 //         );
 //     }
 // }
-
 #[cfg(test)]
 mod get_middle_val {
     use super::Updater;
